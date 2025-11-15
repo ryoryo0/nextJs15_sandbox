@@ -17,19 +17,15 @@ export default function Header() {
           </a>
 
           <nav className="hidden gap-12 lg:flex">
-            <a href="#" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">ホーム</a>
-            <a href="#" className="inline-flex items-center gap-1 text-lg font-semibold text-indigo-500">
-              商品カテゴリ
-
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-800" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
-              </svg>
-            </a>
-            <a href="#" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">セール</a>
+            <a href="/" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">ホーム</a>
+            {/* <a href="#" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">セール</a> */}
+            <a href="/search" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">商品を検索</a>
             <a href="#" className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">お問い合わせ</a>
           </nav>
 
           <div className="-ml-8 hidden flex-col gap-2.5 sm:flex-row sm:justify-center lg:flex lg:justify-start">
+
+
             <a href="#" className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600 md:text-base">ログイン</a>
 
             <a href="#" className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">新規登録</a>
@@ -77,26 +73,19 @@ export default function Header() {
                 {/* メニューコンテンツ */}
                 <nav className="flex-1 overflow-y-auto p-4">
                   <div className="flex flex-col gap-4">
+                    {/* 検索リンク */}
                     <a
-                      href="#"
+                      href="/"
                       className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       ホーム
                     </a>
                     <a
-                      href="#"
+                      href="/search" onClick={() => setIsMobileMenuOpen(false)}
                       className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      商品カテゴリ
-                    </a>
-                    <a
-                      href="#"
-                      className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      セール
+                      商品を検索
                     </a>
                     <a
                       href="#"
@@ -107,43 +96,6 @@ export default function Header() {
                     </a>
 
                     <div className="my-4 border-t border-gray-200" />
-
-                    {/* カテゴリセクション */}
-                    <div className="space-y-3">
-                      <p className="px-2 text-sm font-semibold text-gray-500">商品カテゴリ</p>
-                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                          </svg>
-                        </div>
-                        <span className="font-medium text-gray-700">ファッション</span>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                          </svg>
-                        </div>
-                        <span className="font-medium text-gray-700">家電・ガジェット</span>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                          </svg>
-                        </div>
-                        <span className="font-medium text-gray-700">インテリア</span>
-                      </a>
-                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                          </svg>
-                        </div>
-                        <span className="font-medium text-gray-700">書籍・雑貨</span>
-                      </a>
-                    </div>
                   </div>
                 </nav>
 
@@ -162,78 +114,6 @@ export default function Header() {
             </div>
           </>
         )}
-
-
-
-        <div className="hidden w-full overflow-hidden rounded-lg border bg-gray-50 shadow-sm lg:block">
-          <div className="mx-auto flex max-w-screen-lg items-center gap-8 p-8">
-            <div className="grid w-2/3 grid-cols-2 gap-8">
-              <a href="#" className="group flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white shadow-lg transition duration-100 group-hover:bg-indigo-600 group-active:bg-indigo-700 md:h-12 md:w-12">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                  </svg>
-                </div>
-
-                <div>
-                  <div className="mb-1 font-semibold">ファッション</div>
-                  <p className="text-sm text-gray-500">最新のトレンドアイテムを多数取り揃えております。</p>
-                </div>
-              </a>
-
-              <a href="#" className="group flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white shadow-lg transition duration-100 group-hover:bg-indigo-600 group-active:bg-indigo-700 md:h-12 md:w-12">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                  </svg>
-                </div>
-
-                <div>
-                  <div className="mb-1 font-semibold">家電・ガジェット</div>
-                  <p className="text-sm text-gray-500">最新のテクノロジー製品をお手頃価格で。</p>
-                </div>
-              </a>
-
-              <a href="#" className="group flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white shadow-lg transition duration-100 group-hover:bg-indigo-600 group-active:bg-indigo-700 md:h-12 md:w-12">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-                  </svg>
-                </div>
-
-                <div>
-                  <div className="mb-1 font-semibold">インテリア</div>
-                  <p className="text-sm text-gray-500">お部屋を彩る素敵なアイテムが揃っています。</p>
-                </div>
-              </a>
-
-              <a href="#" className="group flex gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white shadow-lg transition duration-100 group-hover:bg-indigo-600 group-active:bg-indigo-700 md:h-12 md:w-12">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
-                  </svg>
-                </div>
-
-                <div>
-                  <div className="mb-1 font-semibold">書籍・雑貨</div>
-                  <p className="text-sm text-gray-500">人気の書籍から便利な雑貨まで幅広く。</p>
-                </div>
-              </a>
-            </div>
-
-            <div className="w-1/3 overflow-hidden rounded-lg border">
-              <div className="h-48 bg-gray-100">
-                <img src="https://images.unsplash.com/photo-1619118884592-11b151f1ae11?auto=format&q=75&fit=crop&w=320" loading="lazy" alt="注目商品" className="h-full w-full object-cover object-center" />
-              </div>
-
-              <div className="flex items-center justify-between gap-2 bg-white p-3">
-                <p className="text-sm text-gray-500">今月の特集商品をチェック</p>
-
-                <a href="#" className="inline-block shrink-0 rounded-lg border bg-white px-3 py-1 text-sm font-semibold text-indigo-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-50 focus-visible:ring active:bg-gray-100">詳細</a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
