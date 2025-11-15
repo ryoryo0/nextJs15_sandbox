@@ -1,6 +1,11 @@
-import Image from "next/image";
 
-export default function Home() {
+import { getFeaturedProducts } from "@/lib/api/products";
+import ProductCard from "@/components/product/ProductCard";
+
+export default async function Home() {
+  // おすすめ商品を取得
+  const products = await getFeaturedProducts();
+
   return (
     <div>
       <main className="bg-white py-6 sm:py-8 lg:py-12">
@@ -44,86 +49,9 @@ export default function Home() {
             </div>
 
             <div className="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
-              {/* 商品カード1 */}
-              <div>
-                <a href="#" className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
-                  <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="プレミアム腕時計" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                  <div className="absolute left-0 bottom-2 flex gap-2">
-                    <span className="rounded-r-lg bg-red-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">-20%</span>
-                  </div>
-                </a>
-
-                <div className="flex items-start justify-between gap-2 px-2">
-                  <div className="flex flex-col">
-                    <a href="#" className="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">プレミアム腕時計</a>
-                    <span className="text-gray-500">シルバー</span>
-                  </div>
-
-                  <div className="flex flex-col items-end">
-                    <span className="font-bold text-gray-600 lg:text-lg">¥19,200</span>
-                    <span className="text-sm text-red-500 line-through">¥24,000</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* 商品カード2 */}
-              <div>
-                <a href="#" className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
-                  <img src="https://images.unsplash.com/photo-1588099768523-f4e6a5679d88?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="レザーバッグ" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-                </a>
-
-                <div className="flex items-start justify-between gap-2 px-2">
-                  <div className="flex flex-col">
-                    <a href="#" className="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">レザーバッグ</a>
-                    <span className="text-gray-500">ブラウン</span>
-                  </div>
-
-                  <div className="flex flex-col items-end">
-                    <span className="font-bold text-gray-600 lg:text-lg">¥15,800</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* 商品カード3 */}
-              <div>
-                <a href="#" className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
-                  <img src="https://images.unsplash.com/photo-1610824352934-c10d87b700cc?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="ワイヤレスイヤホン" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-
-                  <div className="absolute left-0 bottom-2 flex gap-2">
-                    <span className="rounded-r-lg bg-indigo-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">NEW</span>
-                  </div>
-                </a>
-
-                <div className="flex items-start justify-between gap-2 px-2">
-                  <div className="flex flex-col">
-                    <a href="#" className="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">ワイヤレスイヤホン</a>
-                    <span className="text-gray-500">ホワイト</span>
-                  </div>
-
-                  <div className="flex flex-col items-end">
-                    <span className="font-bold text-gray-600 lg:text-lg">¥12,800</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* 商品カード4 */}
-              <div>
-                <a href="#" className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
-                  <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&q=75&fit=crop&w=600" loading="lazy" alt="スニーカー" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
-                </a>
-
-                <div className="flex items-start justify-between gap-2 px-2">
-                  <div className="flex flex-col">
-                    <a href="#" className="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl">スニーカー</a>
-                    <span className="text-gray-500">ブラック</span>
-                  </div>
-
-                  <div className="flex flex-col items-end">
-                    <span className="font-bold text-gray-600 lg:text-lg">¥9,800</span>
-                  </div>
-                </div>
-              </div>
+              {products.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
             </div>
           </section>
         </div>

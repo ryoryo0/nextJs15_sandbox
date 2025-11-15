@@ -1,4 +1,10 @@
+'use client';
+
+import { useState } from 'react';
+
 export default function Header() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="bg-white lg:pb-12">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
@@ -29,7 +35,11 @@ export default function Header() {
             <a href="#" className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">新規登録</a>
           </div>
 
-          <button type="button" className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:hidden">
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="inline-flex items-center gap-2 rounded-lg bg-gray-200 px-2.5 py-2 text-sm font-semibold text-gray-500 ring-indigo-300 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base lg:hidden"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
             </svg>
@@ -38,6 +48,121 @@ export default function Header() {
           </button>
 
         </header>
+
+        {/* モバイルメニュー */}
+        {isMobileMenuOpen && (
+          <>
+            {/* オーバーレイ */}
+            <div
+              className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+
+            {/* メニューパネル */}
+            <div className="fixed right-0 top-0 z-50 h-full w-full max-w-sm bg-white shadow-lg lg:hidden">
+              <div className="flex h-full flex-col">
+                {/* ヘッダー */}
+                <div className="flex items-center justify-between border-b p-4">
+                  <span className="text-lg font-bold text-gray-800">メニュー</span>
+                  <button
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="rounded-lg p-2 text-gray-400 transition hover:bg-gray-100"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* メニューコンテンツ */}
+                <nav className="flex-1 overflow-y-auto p-4">
+                  <div className="flex flex-col gap-4">
+                    <a
+                      href="#"
+                      className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      ホーム
+                    </a>
+                    <a
+                      href="#"
+                      className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      商品カテゴリ
+                    </a>
+                    <a
+                      href="#"
+                      className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      セール
+                    </a>
+                    <a
+                      href="#"
+                      className="rounded-lg border border-gray-200 px-4 py-3 text-center text-base font-semibold text-gray-700 transition hover:bg-gray-50"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      お問い合わせ
+                    </a>
+
+                    <div className="my-4 border-t border-gray-200" />
+
+                    {/* カテゴリセクション */}
+                    <div className="space-y-3">
+                      <p className="px-2 text-sm font-semibold text-gray-500">商品カテゴリ</p>
+                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                          </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">ファッション</span>
+                      </a>
+                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                          </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">家電・ガジェット</span>
+                      </a>
+                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                          </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">インテリア</span>
+                      </a>
+                      <a href="#" className="flex items-center gap-3 rounded-lg px-3 py-2 transition hover:bg-gray-50">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-indigo-500 text-white">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+                          </svg>
+                        </div>
+                        <span className="font-medium text-gray-700">書籍・雑貨</span>
+                      </a>
+                    </div>
+                  </div>
+                </nav>
+
+                {/* フッターボタン */}
+                <div className="border-t p-4">
+                  <div className="flex flex-col gap-2">
+                    <a href="#" className="inline-block rounded-lg px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:text-indigo-500 focus-visible:ring active:text-indigo-600">
+                      ログイン
+                    </a>
+                    <a href="#" className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700">
+                      新規登録
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
 
 
         <div className="hidden w-full overflow-hidden rounded-lg border bg-gray-50 shadow-sm lg:block">
