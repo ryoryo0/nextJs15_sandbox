@@ -27,3 +27,33 @@ export async function getFeaturedProducts(): Promise<Product[]> {
     return [];
   }
 }
+
+/**
+ * 商品を検索する
+ */
+export async function searchProducts(query: string, category?: string): Promise<Product[]> {
+  try {
+    const params = new URLSearchParams();
+    params.set('q', query);
+    if (category && category !== 'all') {
+      params.set('category', category);
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/v1/products/search?${params.toString()}`, {
+      next: { revalidate: 0 }, // 検索結果はキャッシュしない
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`検索に失敗しました: ${response.status}`);
+    }
+
+    const json = await response.json();
+    return json.data || [];
+  } catch (error) {
+    console.error('検索エラー:', error);
+    return [];
+  }
+}
