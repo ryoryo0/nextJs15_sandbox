@@ -1,15 +1,15 @@
-import { Product } from '@/types/product';
+import { Products } from '@/types/products';
 import Image from 'next/image';
 
 interface ProductCardProps {
-  product: Product;
+    product: Products;
 }
 
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div>
-      <a href={`/products/${product.id}`} className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
+      <a href={`/product/${product.id}`} className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
         <img
           src={product.imageUrl}
           loading="lazy"
@@ -46,7 +46,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="flex items-start justify-between gap-2 px-2">
         <div className="flex flex-col">
           <a
-            href={`/products/${product.id}`}
+            href={`/product/${product.id}`}
             className="text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl"
           >
             {product.name}
