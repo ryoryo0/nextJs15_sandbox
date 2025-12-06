@@ -2,11 +2,11 @@
 export interface Product {
   id: number;
   name: string;
-  imageUrl: string;
+  imageUrl: Array<string>;
   categories: Array<string>;
   isNew: boolean;
   isEvent: boolean;
   price: number;
   originalPrice?: number;
-  discountLabelList: Array<string>;
+  discountLabelList: string;
 }
