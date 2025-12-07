@@ -1,3 +1,10 @@
+export type ProductResponse = {
+  status: number;
+  data?: Product;
+  message?: string;
+}
+
+
 // 商品詳細ページの方定義
 export interface Product {
   id: number;
