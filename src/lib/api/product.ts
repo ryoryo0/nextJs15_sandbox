@@ -1,18 +1,37 @@
-import {Product} from '@/types/product';
+import {Product, ProductResponse} from '@/types/product';
+import { API_BASE_URL } from './config';
 
-export async function getProduct(id: number): Promise<Product> {
-  const data: Product = 
-    {
-      id: 3,
-      name: "テスト商品",
-      imageUrl: ['https://laravel12.local/storage/images/product/01KBE2GRXNPEK7FPZ9CHA98KNZ.jpg', 'https://laravel12.local/storage/images/product/01KBE2GRXNPEK7FPZ9CHA98KNZ.jpg'],
-      categories: ['ピアス', 'リング', 'ネックレス'],
-      isNew: true,
-      isEvent: true,
-      price: 9800,
-      originalPrice: 12000,
-      discountLabelList: "テスト登録: 30%OFF",
-    };
 
-  return data; 
+export async function getProduct(id: number, color?: string): Promise<Product | ProductResponse> {
+
+  const url = color
+    ? `${API_BASE_URL}/api/v1/products/${id}?color=${color}`
+    : `${API_BASE_URL}/api/v1/products/${id}`;
+
+  try {
+    const response = await fetch(url, {
+      next: {revalidate: 60},
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (response.status === 204) {
+      return {
+        status: 204,
+        message: '現在在庫登録中'
+      };
+    }
+
+    if (!response.ok) {
+      throw new Error(`商品詳細のデータ取得に失敗しました: ${response.status}`);
+    }
+
+    const json = await response.json();
+
+    return json.data || [];
+  } catch (error) {
+    console.error('商品詳細の取得エラー:', error);
+    return {} as Product; 
+  }
 }
