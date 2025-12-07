@@ -1,14 +1,12 @@
   import { Products } from '@/types/products';
-
+  import {API_BASE_URL} from './config' 
 
   /**
    * 環境変数でAPIのベースURLを管理する場合
    */
-  const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
   export async function getFeaturedProducts(): Promise<Products[]> {
     try {
-
       const response = await fetch(`${API_BASE_URL}/api/v1/products/featured`, {
         next: { revalidate: 60 },
         headers: {
