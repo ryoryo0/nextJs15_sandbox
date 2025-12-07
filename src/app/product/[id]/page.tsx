@@ -3,75 +3,116 @@
 import { getProduct } from "@/lib/api/product"
 import { useParams } from "next/navigation";
 import {useEffect, useState} from "react";
-import {Product} from '@/types/product';
+import {Product, ProductResponse} from '@/types/product';
 
 export default  function Show() {
   const id = Number(useParams().id);
+  const color = useParams().color ? useParams().color : '';
 
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [product, setProduct] = useState<Product | ProductResponse | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [selectedColor, setSelectedColor] = useState<string>(''); // 選択中のカラー
+  const [selectedSize, setSelectedSize] = useState<string>('');
 
-  // const product =  getProduct(id);
-  useEffect(() => {
-    async function fetchProduct() {
-      try {
-        const data = await getProduct(id);
-        console.log(data);
-        setProduct(data);
-      } catch (error) {
-        console.error('商品の取得に失敗しました');
-      } finally {
-        setLoading(false);
-      }
+
+  const fetchProduct = async (color?: string) => {
+    setLoading(true);
+    try {
+      const data = await getProduct(id, color);
+      setProduct(data);
+    } catch (error) {
+      console.error('商品の取得に失敗しました');
+    } finally {
+      setLoading(false);
     }
+  } 
 
+  useEffect(() => {
     fetchProduct();
   }, [id]);
 
+  const handleRefresh = (color: string) => {
+    setSelectedColor(color);
+    fetchProduct(color);
+  };
+
+  // ローディング中
   if (loading) {
     return <div>読み取り中...</div>;
   }
 
+  // 商品データが取得できなかった場合
   if (!product) {
     return <div>商品が見つかりません</div>
   }
 
+  // ProductResponseの場合（status 204など）
+  if ('status' in product && product.status === 204) {
+    return <div>{product.message || '現在在庫登録中'}</div>
+  }
+
+  // Product型として扱う（型ガード）
+  const productData = product as Product;
+
   return (
     <div>
       {/* 商品名 */}
-      <p>{product.name}</p>
+      <p>{productData.name}</p>
 
       {/* 商品画像 */}
-      {product.imageUrl.map((url, index) => (
+      {productData.imageUrl.map((url, index) => (
         <li key={index}>
           <img src={url} alt={`商品画像-${index + 1}`} />
         </li>
       ))}
 
       {/* カテゴリー */}
-      {product.categories.map((category, index) => (
+      {productData.categories.map((category, index) => (
         <span key={index}>{category}</span>
       ))}
       
       {/* 新着 */}
-      {product.isNew
+      {productData.isNew
         ? <p>新着</p>
         : null
       }
 
       {/* イベント適用 */}
-      {product.isEvent 
-        ? <p>{product.discountLabelList}</p>
+      {productData.isEvent 
+        ? <p>{productData.discountLabelList}</p>
         : null
       }
 
       <strong>
         {/* 商品価格 */}
-        {product.price}
+        {productData.price}
         {/* 元の商品の価格 */}
-        <span>{product.originalPrice}</span>
+        {productData.isEvent
+          ? <span>{productData.originalPrice}</span>
+          : null
+        }
+        
       </strong>
+      
+      {/* サイズ */}
+      {productData.colorList.map((color, index)=>(
+        <button key={index} onClick={() => handleRefresh(color)}>{color}</button>
+      ))}
 
+      {/* ストックデータ */}
+      {productData.stockDate.map((date, index)=>(
+        <label key={index}>
+        <input
+          key={index}
+          type="radio"
+          name="size"
+          value={date.size}
+          checked={selectedSize === date.size}
+          onChange={(e) => setSelectedSize(e.target.value)}
+        />
+        {date.size} : {date.stock}
+      </label>
+      ))}
     </div>
   );
 }
