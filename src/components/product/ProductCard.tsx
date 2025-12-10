@@ -7,6 +7,7 @@ interface ProductCardProps {
 
 
 export default function ProductCard({ product }: ProductCardProps) {
+  console.log(product.originalPrice);
   return (
     <div>
       <a href={`/product/${product.id}`} className="group relative mb-2 block h-80 overflow-hidden rounded-lg bg-gray-100 shadow-lg lg:mb-3">
@@ -60,7 +61,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="flex flex-col items-end">
           <span className="font-bold text-gray-600 lg:text-lg">
-            ¥{product.price}
+            {product.price ? `¥${product.price}` : 'Coming Soon'}
+            
           </span>
           {product.originalPrice && product.isEvent &&(
             <span className="text-sm text-red-500 line-through">

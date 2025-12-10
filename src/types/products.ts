@@ -8,7 +8,7 @@ export interface Products {
   isPickUp: boolean;
   isNew: boolean;
   isEvent: boolean;
-  price: number;
-  originalPrice?: number;
+  price: number | null;
+  originalPrice?: number | null;
   discountLabelList: Array<string>;
 }
