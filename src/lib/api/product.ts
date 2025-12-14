@@ -1,12 +1,15 @@
-import {Product, ProductResponse} from '@/types/product';
+import {Product, ProductResponse} from '@/types/api/product';
 import { API_BASE_URL } from './config';
 
 
 export async function getProduct(id: number, color?: string): Promise<Product | ProductResponse> {
 
-  const url = color
-    ? `${API_BASE_URL}/api/v1/products/${id}?color=${color}`
-    : `${API_BASE_URL}/api/v1/products/${id}`;
+  let url = `${API_BASE_URL}/api/v1/products/${id}`;
+
+  if (color) {
+    url += `?color=${color}`;
+  }
+
 
   try {
     const response = await fetch(url, {

@@ -3,7 +3,7 @@
 import { getProduct } from "@/lib/api/product"
 import { useParams } from "next/navigation";
 import {useEffect, useState} from "react";
-import {Product, ProductResponse} from '@/types/product';
+import {Product, ProductResponse} from '@/types/api/product';
 
 export default  function Show() {
   const id = Number(useParams().id);
@@ -13,7 +13,6 @@ export default  function Show() {
   const [loading, setLoading] = useState<boolean>(true);
   const [selectedColor, setSelectedColor] = useState<string>(''); // 選択中のカラー
   const [selectedSize, setSelectedSize] = useState<string>('');
-
 
   const fetchProduct = async (color?: string) => {
     setLoading(true);
