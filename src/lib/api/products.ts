@@ -1,4 +1,4 @@
-  import { Products } from '@/types/products';
+  import { Products } from '@/types/api/products';
   import {API_BASE_URL} from './config' 
 
   /**

@@ -1,5 +1,6 @@
-import { Products } from '@/types/products';
+import { Products } from '@/types/api/products';
 import Image from 'next/image';
+import Badge from '@/components/product/Badge'
 
 interface ProductCardProps {
     product: Products;
@@ -19,29 +20,23 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
 
         {/* バッジ表示 */}
-        {product.isNew && (
-          <div className="absolute left-0 bottom-2 flex gap-2">
-              <span className="rounded-r-lg bg-indigo-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">
-                NEW
-              </span>
-          </div>
-        )}
-        {product.isPickUp && (
-          <div className="absolute left-0 bottom-2 flex gap-2">
-              <span className="rounded-r-lg bg-indigo-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">
-                Pick Up
-              </span>
-          </div>
-        )}
-        
-          {product.discountLabelList.map((discountLabel, index) => (
-            <div className="absolute left-0 bottom-2 flex gap-2" key={index} >
-              <span className="rounded-r-lg bg-indigo-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white">
-                {discountLabel}
-              </span>
-            </div>
+        <div className="absolute left-0 bottom-2 flex gap-2">
+          {product.isNew && (
+            <Badge color="indigo">
+              NEW
+            </Badge>
+          )}
+          {product.isPickUp && (
+            <Badge color="red">
+              Pick Up
+            </Badge>
+          )}
+          {product.discountLabelList.map((discountLabel, index) => (  
+            <Badge color="indigo" key={index}>
+              {discountLabel}
+            </Badge>
           ))}
-        
+        </div>
       </a>
 
       <div className="flex items-start justify-between gap-2 px-2">
